@@ -36,6 +36,22 @@ public class Loops {
         }
 
     }
+
+    public void breakAndContinues () {
+        int i = 0;
+
+        while (true) {
+            i++;
+            if (i % 2 == 1) {
+                continue;
+            }
+            System.out.println(i);
+            if (i >= 10) {
+                break;
+            }
+        }
+    }
+
 }
 
 
