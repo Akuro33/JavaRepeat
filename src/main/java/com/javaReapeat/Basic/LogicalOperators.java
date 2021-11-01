@@ -2,7 +2,7 @@ package com.javaReapeat.Basic;
 
 public class LogicalOperators {
 
-    public LogicalOperators() {
+    public void logicalOperators() {
         boolean zmienna;
         System.out.println(zmienna = 2 == 1 || 5 > 10);
         System.out.println(zmienna = 2 == 2 && 15 > 10);

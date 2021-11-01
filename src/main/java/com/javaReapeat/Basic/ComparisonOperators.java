@@ -1,7 +1,7 @@
 package com.javaReapeat.Basic;
 
 public class ComparisonOperators {
-    public void ComparisonOperators() {
+    public void comparisonOperators() {
         boolean zmienna;
 
         System.out.println(zmienna = 5 == 2);

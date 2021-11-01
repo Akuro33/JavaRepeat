@@ -3,7 +3,7 @@ package com.javaReapeat.Basic;
 public class ArithmeticOperators {
 
 
-    public void ArithmeticOperators () {
+    public void arithmeticOperators () {
         int dodawanie = 2 + 2;
         int odejmowanie = 3 - 2;
         int mnozenie = 2 * 3;

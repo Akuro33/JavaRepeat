@@ -1,7 +1,7 @@
 package com.javaReapeat.Basic;
 
 public class ConversionCasting {
-    public ConversionCasting() {
+    public void conversionCasting() {
         /* Rzutowanie niejawne */
         short zmShort = 125;
         int zmInt;
