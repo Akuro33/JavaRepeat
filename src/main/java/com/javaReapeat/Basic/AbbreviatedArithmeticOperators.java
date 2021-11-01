@@ -11,6 +11,5 @@ public class AbbreviatedArithmeticOperators {
         System.out.println(a *= 2);
         System.out.println(a /= 2);
         System.out.println(a %= 5);
-
     }
 }
