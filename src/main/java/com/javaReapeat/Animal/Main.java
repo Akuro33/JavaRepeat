@@ -3,11 +3,9 @@ package com.javaReapeat.Animal;
 public class Main {
 
     public static void main(String[] args) {
-        Cat cat = new Cat("Sisi", 4, "czarny");
-
+        System.out.println(Eat.type);
+        Cat cat = new Cat();
         cat.getVoice();
-
-        System.out.println(cat);
-
+        cat.drinkMilk();
     }
 }
