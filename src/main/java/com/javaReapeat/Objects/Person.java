@@ -1,18 +1,28 @@
 package com.javaReapeat.Objects;
 
 public class Person {
-    Person(String name, int age) {
-        this.name = name;
-        this.age = age;
-        population++;
+    private String name;
+
+    public String getName() {
+        return name;
     }
 
-    String name;
-    int age;
+    public void setName(String name) {
+        if(name.length() >= 3) {
+            name = name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase();
+            this.name = name;
+        }
+    }
 
-    static int population = 0;
+    private int age;
 
-    public static void inc() {
-        population++;
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        if(age >= 0) {
+            this.age = age;
+        }
     }
 }

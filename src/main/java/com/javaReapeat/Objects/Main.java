@@ -3,7 +3,6 @@ package com.javaReapeat.Objects;
 public class Main {
 
     public static void main(String[] args) {
-        createMovies();
         createPerson();
     }
 
@@ -26,13 +25,11 @@ public class Main {
     }
 
     public static void createPerson () {
-        Person p1 = new Person("Adrian", 18);
-        System.out.println(p1.population);
-        Person p2 = new Person("Bartek", 22);
-
-        System.out.println(p2.population);
-        Person.inc();
-        System.out.println(Person.population);
+        Person person = new Person();
+        person.setName("aDrIaN");
+        person.setAge(-99);
+        System.out.println(person.getName());
+        System.out.println(person.getAge());
     }
 
 }
