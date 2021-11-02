@@ -1,17 +1,18 @@
 package com.javaReapeat.Objects;
 
 public class Person {
-    String name;
-    int age;
-
-    Person(String name) {
-        this.name = name;
-        age = -1;
-    }
     Person(String name, int age) {
         this.name = name;
         this.age = age;
+        population++;
     }
 
+    String name;
+    int age;
 
+    static int population = 0;
+
+    public static void inc() {
+        population++;
+    }
 }

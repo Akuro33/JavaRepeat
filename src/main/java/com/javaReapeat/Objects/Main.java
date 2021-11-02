@@ -27,10 +27,12 @@ public class Main {
 
     public static void createPerson () {
         Person p1 = new Person("Adrian", 18);
-        Person p2 = new Person("Bartek");
+        System.out.println(p1.population);
+        Person p2 = new Person("Bartek", 22);
 
-        System.out.println(p1.name + ", " + p1.age);
-        System.out.println(p2.name + ", " + p2.age);
+        System.out.println(p2.population);
+        Person.inc();
+        System.out.println(Person.population);
     }
 
 }
