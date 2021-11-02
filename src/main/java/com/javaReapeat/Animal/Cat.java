@@ -3,9 +3,6 @@ package com.javaReapeat.Animal;
 final public class Cat extends Animal {
     String color;
 
-    public void getVoice() {
-        System.out.println("Meow");
-    }
 
     public Cat(String name, int age, String color) {
         super(name, age);
@@ -13,5 +10,14 @@ final public class Cat extends Animal {
     }
 
 
+    @Override
+    public void getVoice() {
+        System.out.println("Meow");
+    }
+
+    @Override
+    public String toString() {
+        return "I'm " + super.name;
+    }
 }
 

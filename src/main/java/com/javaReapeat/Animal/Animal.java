@@ -8,6 +8,10 @@ public class Animal {
         System.out.println("Tasty!");
     }
 
+    public void getVoice() {
+        System.out.println("Default voice");
+    }
+
     public Animal(String name, int age) {
         this.name = name;
         this.age = age;
