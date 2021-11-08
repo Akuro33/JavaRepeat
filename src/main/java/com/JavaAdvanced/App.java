@@ -1,16 +1,14 @@
 package com.JavaAdvanced;
 
-import java.util.concurrent.Executor;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
+import java.time.Period;
+import java.util.concurrent.*;
 
 public class App {
 
     public static void main(String[] args) throws InterruptedException {
         System.out.println("Główny Wątek aplikacji: " + Thread.currentThread().getName());
 
-        ExecutorService executorService = Executors.newFixedThreadPool(2);
+        ScheduledExecutorService executorService = Executors.newScheduledThreadPool(2);
 
         Runnable worker1 = () -> {
             try {
@@ -42,13 +40,12 @@ public class App {
                 e.printStackTrace();
             }
         };
-
-        executorService.submit(worker1);
-        executorService.submit(worker2);
-        executorService.submit(worker3);
-        executorService.shutdown();
+        executorService.schedule(worker1, 5, TimeUnit.SECONDS);
+        executorService.scheduleAtFixedRate(worker3, 0, 6, TimeUnit.SECONDS);
 
 
 
+
+     //   executorService.shutdown();
     }
 }
