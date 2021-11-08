@@ -12,24 +12,51 @@ public class App {
 
         ExecutorService executor = Executors.newFixedThreadPool(5);
 
-        CompletableFuture.runAsync( () -> System.out.println("Wątek: "+ Thread.currentThread().getName()));
+        final boolean err = true;
 
-        CompletableFuture<Integer> integerCompletableFuture = CompletableFuture.supplyAsync(() -> {
+        CompletableFuture.runAsync( () -> System.out.println("Wątek: "+ Thread.currentThread().getName()), executor);
+
+        CompletableFuture.supplyAsync(() -> {
             try {
-                TimeUnit.SECONDS.sleep(10);
+                TimeUnit.SECONDS.sleep(5);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            if (err) {
+                try {
+                    throw new IllegalAccessException("Wrong argument");
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+            }
             return 42;
-        }, executor ).thenApply(r -> {
-            System.out.println("*2 " + Thread.currentThread().getName());
-            return r*2;
+        }, executor).exceptionally(exception -> {
+            System.out.println("ERROR!! "+ exception.getMessage());
+            return 2;
         }).thenApply(r -> {
+                    System.out.println("*2 " + Thread.currentThread().getName());
+                    return r * 2;
+                } ).thenApply(r -> {
             System.out.println("+1 " + Thread.currentThread().getName());
-            return r+1;});
+            return r + 1;
+        });
 
-        Integer result = integerCompletableFuture.get();
-        System.out.println((result*2)+1);
+/*
+
+        integerCompletableFuture.thenApply(r -> {
+            System.out.println("*2 " + Thread.currentThread().getName());
+            return r * 2;
+        });
+        integerCompletableFuture
+        });
+        integerCompletableFuture.thenApply(r -> {
+            System.out.println("sout " + Thread.currentThread().getName());
+            System.out.println(r);
+            return r;
+        });
+*/
+
+
 
 
 
