@@ -1,51 +1,24 @@
 package com.JavaAdvanced;
 
-import java.time.Period;
+
 import java.util.concurrent.*;
 
 public class App {
 
-    public static void main(String[] args) throws InterruptedException {
-        System.out.println("Główny Wątek aplikacji: " + Thread.currentThread().getName());
+    public static void main(String[] args) throws ExecutionException, InterruptedException {
 
-        ScheduledExecutorService executorService = Executors.newScheduledThreadPool(2);
+        ExecutorService executor = Executors.newFixedThreadPool(2);
 
-        Runnable worker1 = () -> {
-            try {
-                System.out.println("Robotnik 1 - Aktualny wątek: " + Thread.currentThread().getName());
-                System.out.println("Ładuje butle z tlenem");
-                TimeUnit.SECONDS.sleep(10);
-                System.out.println("Zaladowano Butle z Tlenem");
-            }catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+        Callable<Integer> answerToEverything = () -> {
+            TimeUnit.SECONDS.sleep(10);
+            return 42;
         };
-        Runnable worker2 = () -> {
-            try {
-                System.out.println("Robotnik 2 - Aktualny wątek: " + Thread.currentThread().getName());
-                System.out.println("Ładuje zapas pożywienia");
-                TimeUnit.SECONDS.sleep(5);
-                System.out.println("Załadowano Pożywienie");
-            }catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        };
-        Runnable worker3 = () -> {
-            try {
-                System.out.println("Robotnik 3 - Aktualny wątek: " + Thread.currentThread().getName());
-                System.out.println("Ładuje paliwo");
-                TimeUnit.SECONDS.sleep(3);
-                System.out.println("Załadowano Paliwo");
-            }catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        };
-        executorService.schedule(worker1, 5, TimeUnit.SECONDS);
-        executorService.scheduleAtFixedRate(worker3, 0, 6, TimeUnit.SECONDS);
 
+        Future<Integer> result = executor.submit(answerToEverything);
 
+        Integer integer = result.get();
+        System.out.println(integer);
 
-
-     //   executorService.shutdown();
+        executor.shutdown();
     }
 }
