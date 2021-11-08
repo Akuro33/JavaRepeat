@@ -4,6 +4,7 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class RaceCondition {
 
@@ -25,20 +26,13 @@ public class RaceCondition {
 }
 
  class Counter {
-    private int counter = 0;
+    private AtomicInteger counter = new AtomicInteger(0);
 
     public void increase() {
-        System.out.println("costam 1");
-        System.out.println("costam 2");
-        synchronized (this){
-            counter = counter + 1;
-        }
-
-        System.out.println("costam 3");
-
+            counter.getAndIncrement();
     }
 
     public int getCounter() {
-        return counter;
+        return counter.get();
     }
 }
