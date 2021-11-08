@@ -1,5 +1,7 @@
 package com.JavaAdvanced;
 
+import java.util.concurrent.TimeUnit;
+
 public class App {
 
     public static void main(String[] args) {
@@ -8,13 +10,20 @@ public class App {
         Thread secondThread = new MyThread("My-Thread-2");
 
         thread.start();
-       Runnable runnable = new Runnable() {
-           @Override
-           public void run() {
-               System.out.println( "Wykonywany Wątek Runnable: " + Thread.currentThread().getName());
-           }
-       };
-       Thread anotherThread = new Thread(runnable, "My-Runnable-1");
-       anotherThread.start();
+        Runnable runnable = () -> {
+            try {
+                System.out.println("Wykonywany Wątek Runnable: " + Thread.currentThread().getName());
+                for (int i = 1; i <= 10; i++) {
+                    System.out.println(i);
+                    TimeUnit.SECONDS.sleep(1);
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        };
+
+        Thread anotherThread = new Thread(runnable, "My-Runnable-1");
+        anotherThread.start();
+
     }
 }
