@@ -1,15 +1,17 @@
 package com.JavaAdvanced;
 
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 public class App {
 
     public static void main(String[] args) throws InterruptedException {
         System.out.println("Główny Wątek aplikacji: " + Thread.currentThread().getName());
-        Thread thread = new MyThread("My-Thread-1");
-        Thread secondThread = new MyThread("My-Thread-2");
 
-        thread.start();
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+
         Runnable countDown = () -> {
             try {
                 System.out.println("Wykonywany Wątek Runnable: " + Thread.currentThread().getName());
@@ -21,18 +23,15 @@ public class App {
                 e.printStackTrace();
             }
         };
-
         Runnable blastOff = () -> {
-            System.out.println("Wykonywany Wątek Runnable: " + Thread.currentThread().getName());
+            System.out.println("Wykonywany Wątek (BlastOff): " + Thread.currentThread().getName());
             System.out.println("Blast Off!");
         };
+        executorService.submit(countDown);
+        executorService.submit(blastOff);
 
-        Thread countDownThread = new Thread(countDown, "CountDowns");
-        Thread blastOfThread = new Thread(blastOff, "BlastOff");
-        countDownThread.start();
+        executorService.shutdown();
 
-        countDownThread.join(400);
-        blastOfThread.start();
 
     }
 }
