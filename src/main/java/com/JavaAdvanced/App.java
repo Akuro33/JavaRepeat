@@ -8,6 +8,13 @@ public class App {
         Thread secondThread = new MyThread("My-Thread-2");
 
         thread.start();
-        secondThread.start();
+       Runnable runnable = new Runnable() {
+           @Override
+           public void run() {
+               System.out.println( "Wykonywany Wątek Runnable: " + Thread.currentThread().getName());
+           }
+       };
+       Thread anotherThread = new Thread(runnable, "My-Runnable-1");
+       anotherThread.start();
     }
 }
