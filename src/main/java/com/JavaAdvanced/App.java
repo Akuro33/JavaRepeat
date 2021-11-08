@@ -15,8 +15,19 @@ public class App {
         };
 
         Future<Integer> result = executor.submit(answerToEverything);
+/*        int i = 0;
+        while (!result.isDone()){
+            System.out.println("Brak Wyniku po raz: " + ++i );
+            TimeUnit.SECONDS.sleep(2);
+        }*/
 
-        Integer integer = result.get();
+
+        Integer integer = null;
+        try {
+            integer = result.get(4, TimeUnit.SECONDS);
+        } catch (TimeoutException e) {
+            e.printStackTrace();
+        }
         System.out.println(integer);
 
         executor.shutdown();
