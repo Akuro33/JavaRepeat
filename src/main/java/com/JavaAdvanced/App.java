@@ -1,6 +1,8 @@
 package com.JavaAdvanced;
 
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.*;
 
 public class App {
@@ -14,21 +16,27 @@ public class App {
             return 42;
         };
 
-        Future<Integer> result = executor.submit(answerToEverything);
-/*        int i = 0;
-        while (!result.isDone()){
-            System.out.println("Brak Wyniku po raz: " + ++i );
-            TimeUnit.SECONDS.sleep(2);
-        }*/
+        Callable<Integer> anotherAnswerToEverything = () -> {
+            TimeUnit.SECONDS.sleep(13);
+            return 43;
+        };
 
+        Callable<Integer> finalAnswerToEverything = () -> {
+            TimeUnit.SECONDS.sleep(5);
+            return 44;
+        };
 
-        Integer integer = null;
-        try {
-            integer = result.get(4, TimeUnit.SECONDS);
-        } catch (TimeoutException e) {
-            e.printStackTrace();
-        }
+        List<Callable<Integer>> callablesList = Arrays.asList(answerToEverything, anotherAnswerToEverything, finalAnswerToEverything);
+        List<Future<Integer>> futuresList = executor.invokeAll(callablesList);
+
+        Integer integer = executor.invokeAny(callablesList);
+
         System.out.println(integer);
+        for (Future<Integer> f: futuresList)
+        {
+            System.out.println(f.get());
+        }
+
 
         executor.shutdown();
     }
